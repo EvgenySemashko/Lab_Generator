@@ -59,18 +59,17 @@ namespace Lab_Generator
                         }
                         Generator.GeneratePasword(length);
 
-                        //Console.WriteLine("\nSave the password?" +
-                        //    "\nY - yes N - no");
+                        Console.WriteLine("\nSave the password?" +
+                            "\nY - yes N - no");
 
-                        //while (!char.TryParse(Console.ReadLine(), out answer) || answer != 'Y' || answer == 'N')
-                        //{
-                        //    Console.WriteLine("Only Y or N");
-                        //}
-                        ////answer = Convert.ToChar(Console.ReadLine());
-                        //if (answer == 'Y')
-                        //{
-                        //    Generator.SavePassword();
-                        //}
+                        while (!char.TryParse(Console.ReadLine(), out answer) || answer != 'Y' || answer == 'N')
+                        {
+                            Console.WriteLine("Only Y or N");
+                        }
+                        if (answer == 'Y')
+                        {
+                            Generator.SavePassword();
+                        }
                         Generator.ClearPassw();
                         Console.WriteLine();
                         break;

@@ -12,6 +12,7 @@ namespace Lab_Generator
         static Dictionary<(int, bool), string> Status = new Dictionary<(int, bool), string>();
         static ArrayList Password = new ArrayList();
 
+      
         static Generator()
         {
 
@@ -21,18 +22,17 @@ namespace Lab_Generator
             Status.Add((4, false), "IsOnlySymbols");
         }
 
+        // Вывод информации о текущем состоянии генераторов
         public static void GetInfoTypes()
         {
             foreach (var stat in Status)
             {
                 if (stat.Key.Item2 == false)
                 {
-
                     Console.Write($"\t{stat.Key.Item1} - {stat.Value}: ");
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write($"{stat.Key.Item2}\n");
                     Console.ResetColor();
-
                 }
                 else
                 {
@@ -43,7 +43,9 @@ namespace Lab_Generator
                 }
             }
         }
+        
 
+        // Установка 
         public static void SetTypePassword(int select)
         {
 
@@ -114,7 +116,7 @@ namespace Lab_Generator
                                 select types.Key.Item1;
 
 
-
+            string s = "";
             foreach (int item in selectedTypes)
             {
                 switch (item)
@@ -123,6 +125,7 @@ namespace Lab_Generator
                         for (int i = 0; i < length; i++)
                         {
                             Password.Add(rand.Next(0, 9));
+                            s += (int)rand.Next(0, 9);
                         }
                         break;
                     case 2:
@@ -149,22 +152,19 @@ namespace Lab_Generator
             // Перемешивание массива
             for (int i = 0; i < Password.Count; i++)
             {
-                int j = rand.Next(i + 1);
-                var temp = Password[j];
-                Password[j] = Password[i];
-                Password[i] = temp;
+                    int j = rand.Next(i + 1);
+                    var temp = Password[j];
+                    Password[j] = Password[i];
+                    Password[i] = temp;
             }
 
-
-
-
-
-
+            
             Console.Write("Generated password: ");
             foreach (var item in Password.ToArray().Take(length))
             {
                 Console.Write(item);
             }
+            
 
         }
 
@@ -185,7 +185,7 @@ namespace Lab_Generator
             Status.Add((4, false), "IsOnlySymbols");
         }
 
-        public static async void SavePassword()
+        public static void SavePassword()
         {
             string pathFile = @"C:\Users\ASUS\Documents\SavedPasswords";
             string writePath = @"C:\Users\ASUS\Documents\SavedPasswords\password.txt";
@@ -199,10 +199,12 @@ namespace Lab_Generator
 
             using (StreamWriter writer = new StreamWriter(writePath))
             {
-                for (int i = 0; i < Password.Count; i++)
+
+                foreach (var item in Password)
                 {
-                    await writer.WriteAsync((string)Password[i]);
+                    writer.WriteAsync(item.ToString());
                 }
+
             }
 
 
